@@ -70,10 +70,10 @@ const Index: FC = (): ReactElement => {
             <h1 className="my-4 text-5xl font-bold leading-tight">
               React Boilerplate V2
             </h1>
-            <p className="leading-normal text-2xl mb-8">
+            <p className="leading-normal text-1xl mb-8">
               Kini dengan Dependensi yang lebih sedikit, File Based Router,
-              serta dengan structure yang sama dengan V1 dan penggunaan Zustand
-              + React Query untuk management data yang lebih baik, tetap
+              serta dengan structure yang sama dengan V1 dan penggunaan Context
+              API + React Query untuk management data yang lebih baik, tetap
               menyediakan Auth Full dengan Refresh Token dan Custom Role
               Permission Management
             </p>
