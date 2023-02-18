@@ -6,7 +6,7 @@ const Loading: FC<{ text?: string; fontSize?: string }> = ({
 }): ReactElement => {
   return (
     <div
-      className="flex flex-col items-center h-screen z-10 gap-y-3 justify-center w-full p-4"
+      className="flex flex-col items-center backdrop-opacity-10 backdrop-blur-lg h-screen z-10 gap-y-3 justify-center w-full p-4"
       role="status"
     >
       <svg

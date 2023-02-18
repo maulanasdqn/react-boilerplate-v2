@@ -1,0 +1,87 @@
+export type ListResponseTypes = {
+  availablePage: number;
+  record: Array<ListRecordTypes>;
+  totalCountData: number;
+};
+
+export type ListRecordTypes = {
+  BillToContact: {
+    BusinessName?: string;
+    LastModifiedDateTime?: string;
+    Phone1?: string;
+  };
+  CurrencyID: string;
+  CustomerID: string;
+  Date: string;
+  Details: Array<{
+    AutoCreateIssue: boolean;
+    AverageCost: number;
+    Branch: string;
+    Commissionable: boolean;
+    Completed: boolean;
+    DiscountAmount: number;
+    DiscountPercent: number;
+    DiscountedUnitPrice: number;
+    ExtendedPrice: number;
+    FreeItem: boolean;
+    InventoryID: string;
+    LastModifiedDateTime: string;
+    LineDescription: string;
+    LineNbr: number;
+    LineType: string;
+    ManualDiscount: boolean;
+    MarkForPO: boolean;
+    OpenQty: number;
+    OrderQty: number;
+    OvershipThreshold: number;
+    QtyOnShipments: number;
+    RequestedOn: string;
+    SalesOrderDetailID: string;
+    SalespersonID: string;
+    ShipOn: string;
+    TaxCategory: string;
+    UOM: string;
+    UnbilledAmount: number;
+    UndershipThreshold: number;
+    UnitCost: number;
+    UnitPrice: number;
+    WarehouseID: string;
+  }>;
+  Dry: boolean;
+  EffectiveDate: string;
+  FinnancialSettings: {
+    BillSeparately: boolean;
+    Branch: string;
+    CustomerTaxZone: string;
+    LastModifiedDateTime: string;
+    OverrideTaxZone: boolean;
+    Owner: string;
+    Terms: string;
+  };
+  Frozen: boolean;
+  LastModifiedDateTime: string;
+  LastSync: string;
+  OrderNbr: string;
+  OrderTotal: number;
+  OrderType: string;
+  OrderedQty: number;
+  Payments: [];
+  ShippingSettings: {
+    CancelByDate: string;
+    Canceled: boolean;
+    FOBPoint: string;
+    GroundCollect: boolean;
+    Insurance: boolean;
+    LastModifiedDateTime: string;
+    PreferredWarehouseID: string;
+    Priority: number;
+    ResidentialDelivery: boolean;
+    SaturdayDelivery: boolean;
+    ScheduledShipmentDate: string;
+    ShipSeparately: boolean;
+    ShippingRule: string;
+    ShippingZone: string;
+    UseCustomersAccount: boolean;
+  };
+  Status: string;
+};

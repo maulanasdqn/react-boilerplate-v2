@@ -1,92 +1,72 @@
-import { FC, Fragment, ReactElement, useEffect } from "react";
+import { PublicRoutes } from "@middleware/ProtectedRoutes";
+import { FC, ReactElement, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import useLogin from "@hooks/Auth/useLogin";
+
+type Inputs = {
+  username: string;
+  password: string;
+};
 
 const Index: FC = (): ReactElement => {
-  useEffect(() => {
-    fetch("https://randomuser.me/api/");
-  }, []);
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const { mutate } = useLogin();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    mutate(data, {
+      onError: (err) => {
+        setErrorMsg(err as string);
+      },
+
+      onSuccess: () => {
+        location.reload();
+      },
+    });
+  };
+
   return (
-    <section
-      style={{
-        background:
-          "linear-gradient(90deg, rgba(15,7,154,1) 0%, rgba(3,3,181,1) 29%, rgba(0,212,255,1) 100%)",
-        fontFamily: "Source Sans Pro",
-      }}
-      className="leading-normal tracking-normal text-white h-screen"
-    >
-      <nav id="header" className="fixed w-full z-30 top-0 text-white">
-        <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-          <div className="pl-4 flex items-center">
-            <a
-              className="toggleColour no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-              href="#"
-            >
-              React
-            </a>
-          </div>
-          <div className="block lg:hidden pr-4">
-            <button
-              id="nav-toggle"
-              className="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-            >
-              <svg
-                className="fill-current h-6 w-6"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
+    <PublicRoutes>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex items-center h-full justify-center overflow-hidden w-full"
+      >
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 rounded-xl">
+          <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg">
+            <span className="text-red-500">{errorMsg}</span>
+            <div className="flex flex-col gap-y-4">
+              <input
+                {...register("username")}
+                type="text"
+                name="username"
+                id="username"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Username"
+                required
+              />
+              <input
+                {...register("password")}
+                type="password"
+                name="password"
+                id="password"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Password"
+                required
+              />
+              <button
+                type="submit"
+                className="w-full border-2 border-blue-400 text-blue-400 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
-                <title>Menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-              </svg>
-            </button>
-          </div>
-          <div
-            className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20"
-            id="nav-content"
-          >
-            <ul className="list-reset lg:flex justify-end flex-1 items-center">
-              <li className="mr-3">
-                <a
-                  className="inline-block text-white text-xl py-2 px-4 text-black font-bold no-underline"
-                  href="/dataset"
-                >
-                  Register
-                </a>
-              </li>
-              <li className="mr-3">
-                <a
-                  className="inline-block text-white text-xl py-2 px-4 text-black font-bold no-underline"
-                  href="/predict"
-                >
-                  Login
-                </a>
-              </li>
-            </ul>
+                Masuk
+              </button>
+            </div>
           </div>
         </div>
-        <hr className="border-b border-gray-100 opacity-25 my-0 py-0" />
-      </nav>
-      <div className="pt-24">
-        <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-          <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-            <h1 className="my-4 text-5xl font-bold leading-tight">
-              React Boilerplate V2
-            </h1>
-            <p className="leading-normal text-1xl mb-8">
-              Kini dengan Dependensi yang lebih sedikit, File Based Router,
-              serta dengan structure yang sama dengan V1 dan penggunaan Context
-              API + React Query untuk management data yang lebih baik, tetap
-              menyediakan Auth Full dengan Refresh Token dan Custom Role
-              Permission Management
-            </p>
-          </div>
-          <div className="w-full md:w-3/5 py-6 text-center">
-            <img
-              className="w-full md:w-4/5 z-50"
-              src="https://raw.githubusercontent.com/tailwindtoolbox/Landing-Page/master/hero.png"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
+      </form>
+    </PublicRoutes>
   );
 };
 

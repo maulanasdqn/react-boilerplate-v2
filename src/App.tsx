@@ -1,7 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { FC, ReactElement } from "react";
+import Loading from "@components/Loading";
+import Navbar from "@components/Navbar";
+import useAuth from "@hooks/Auth/useAuth";
+import { FC, Fragment, ReactElement, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
+import { ErrorBoundary } from "react-error-boundary";
 
 const pages = import.meta.glob("./pages/**/*.tsx", { eager: true });
 
@@ -34,7 +39,31 @@ const router = createBrowserRouter(
 );
 
 const App: FC = (): ReactElement => {
-  return <RouterProvider router={router} />;
+  const isAuth = useAuth();
+  return (
+    <Fragment>
+      {isAuth && <Navbar />}
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            fallbackRender={({ resetErrorBoundary }) => (
+              <div>
+                There was an error!
+                <Button onClick={() => resetErrorBoundary()}>Try again</Button>
+              </div>
+            )}
+          >
+            <Suspense fallback={<Loading />}>
+              <section className="px-[19px] pb-[19px]">
+                <RouterProvider router={router} />
+              </section>
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    </Fragment>
+  );
 };
 
 export default App;

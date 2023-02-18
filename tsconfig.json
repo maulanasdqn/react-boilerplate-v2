@@ -27,7 +27,8 @@
       "@pages/*": ["pages/*"],
       "@routers/*": ["routers/*"],
       "@layouts/*": ["layouts/*"],
-      "@stores/*": ["stores/*"]
+      "@stores/*": ["stores/*"],
+      "@middleware/*": ["middleware/*"]
     }
   },
   "include": ["src"],
