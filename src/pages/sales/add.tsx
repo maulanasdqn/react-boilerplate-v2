@@ -7,7 +7,9 @@ import SalesForm from "@modules/Sales/CreateForm";
 const AddSales: FC = (): ReactElement => {
   const BreadCrumbLayouts = lazy(() => import("@layouts/BreadCrumb"));
   const MainLayouts = lazy(() => import("@layouts/Main"));
-  const HeaderTitle = lazy(() => import("@modules/Common/HeaderTitle"));
+  const HeaderTitle = lazy(
+    () => import("@modules/Sales/CreateForm/Common/HeaderTitle")
+  );
   const ContentWrapper = lazy(() => import("@layouts/ContentWrapper"));
 
   return (

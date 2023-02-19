@@ -10,12 +10,8 @@ type Inputs = {
 
 const Index: FC = (): ReactElement => {
   const [errorMsg, setErrorMsg] = useState<string>("");
-  const { mutate } = useLogin();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { mutate, isLoading } = useLogin();
+  const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     mutate(data, {
       onError: (err) => {
@@ -60,7 +56,7 @@ const Index: FC = (): ReactElement => {
                 type="submit"
                 className="w-full border-2 border-blue-400 text-blue-400 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
-                Masuk
+                {isLoading ? "Sedang Masuk..." : "Masuk"}
               </button>
             </div>
           </div>

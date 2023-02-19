@@ -1,6 +1,5 @@
 import Loading from "@components/Loading";
 import SubLoading from "@components/Loading/SubLoading";
-import useHeaderMenu from "@hooks/Common/useHeaderMenu";
 import { ProtectedRoutes } from "@middleware/ProtectedRoutes";
 import { ListBreadCrumb } from "@utils/constant";
 import { FC, lazy, ReactElement, Suspense, useEffect } from "react";
@@ -8,7 +7,9 @@ import { ErrorBoundary } from "react-error-boundary";
 
 const MainLayouts = lazy(() => import("@layouts/Main"));
 const ListContent = lazy(() => import("@modules/Sales/List"));
-const HeaderTitle = lazy(() => import("@modules/Common/HeaderTitle"));
+const HeaderTitle = lazy(
+  () => import("@modules/Sales/CreateForm/Common/HeaderTitle")
+);
 const ContentWrapper = lazy(() => import("@layouts/ContentWrapper"));
 const TableLayouts = lazy(() => import("@layouts/Table"));
 const BreadCrumbLayouts = lazy(() => import("@layouts/BreadCrumb"));

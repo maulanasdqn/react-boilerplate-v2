@@ -17,6 +17,7 @@ const AuthService = {
     try {
       const res = await ApiService.customRequest(requestData);
       TokenService.saveToken(res.data.token);
+      TokenService.saveUser(res.data);
       ApiService.setHeader();
       return res.data;
     } catch (error) {

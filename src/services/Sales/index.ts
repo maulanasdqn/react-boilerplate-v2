@@ -1,3 +1,4 @@
+import { InventoryResponseTypes } from "@modules/Sales/CreateForm/Inventory/types";
 import ApiService from "@services/Api";
 import { MetaTypes } from "@services/types";
 import { getErrorMessage } from "@utils/helper";
@@ -138,14 +139,13 @@ const SalesService = {
     }
   },
 
-  getDetailsSalesOrder: async (props: MetaTypes) => {
-    const { query } = props;
+  getDetailsSalesOrder: async (id: string) => {
     const requestData = {
       method: "get",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      url: `/SalesOrderReps/${query}`,
+      url: `/SalesOrderReps/${id}`,
     };
     try {
       const response = await ApiService.customRequest(requestData);
@@ -219,7 +219,7 @@ const SalesService = {
 
   getSalesInventoryLookup: async (
     props: MetaTypes
-  ): Promise<Array<{ totalAvailablePage: number; record: [] }>> => {
+  ): Promise<InventoryResponseTypes[]> => {
     const { query, page, rowCount, tipeStorage = "" } = props;
     const requestData = {
       method: "get",
@@ -242,11 +242,7 @@ const SalesService = {
     }
   },
 
-  getSalesPersonByEmployeeId: async ({
-    employeeId,
-  }: {
-    employeeId: number | string;
-  }) => {
+  getSalesPersonByEmployeeId: async (employeeId: number | string) => {
     const requestData = {
       method: "get",
       headers: {

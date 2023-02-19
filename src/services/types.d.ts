@@ -1,11 +1,11 @@
 export type MetaTypes = {
-  page: number;
-  rowCount: number;
-  start: string;
-  end: string;
+  page?: number;
+  rowCount?: number;
+  start?: string;
+  end?: string;
   query?: string;
   tipeStorage?: string;
-  availablePage: number;
+  availablePage?: number;
 };
 
 export interface CommonResponse<CommonTypes> {

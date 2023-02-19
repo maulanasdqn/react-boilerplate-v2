@@ -23,6 +23,8 @@ type PropsTypes = {
   get?: boolean;
   slug?: string;
   children: ReactNode;
+  name?: string;
+  ref?: any;
 };
 
 const Accordion: FC<PropsTypes> = (props): ReactElement => {
@@ -55,10 +57,11 @@ const Accordion: FC<PropsTypes> = (props): ReactElement => {
               <input
                 id={props.id}
                 type={"checkbox"}
-                name={props.title}
+                name={props.name || "selected"}
                 onChange={props.onChange}
                 checked={props.get}
                 value={props.value}
+                ref={props.ref}
               />
             )}
             <h1

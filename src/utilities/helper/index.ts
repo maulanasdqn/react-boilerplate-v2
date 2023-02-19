@@ -1,3 +1,4 @@
+import moment from "moment";
 import { ErrorWithMessage } from "./types";
 
 export const getErrorMessage = (error: unknown): string => {
@@ -7,4 +8,4 @@ export const getErrorMessage = (error: unknown): string => {
 };
 
 export const formatDate = (val: Date | string | number): string =>
-  new Date(val).toISOString().substring(0, 10);
+  moment(val).format("YYYY-MM-DD");
